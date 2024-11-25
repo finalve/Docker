@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: U2e2P0-t8rs
+            POSTGRES_PASSWORD: iUERKmmjui27^@&0
+        ports:
+            - 5432:5432    
+        volumes:
+            - ./postgres:/var/lib/postgresql
+    
+    pgadmin:
+        image: dpage/pgadmin4
+        restart: always
+        environment:
+          PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com  # อีเมลสำหรับเข้าสู่ระบบ pgAdmin
+          PGADMIN_DEFAULT_PASSWORD: password           # รหัสผ่านสำหรับเข้าสู่ระบบ pgAdmin
+        ports:
+          - "15432:80"  # ผูกพอร์ตสำหรับ pgAdmin
+        depends_on:
+          - postgres  # ทำให้ pgAdmin รอ PostgreSQL ให้พร้อมก่อนเริ่มทำงาน
+
+volumes:
+    postgres:
